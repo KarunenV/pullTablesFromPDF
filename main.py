@@ -23,7 +23,7 @@ for pdf_file in sorted(pdf_files):
     for idx, df in enumerate(dfs, start=1):
         out = os.path.join(
             output_dir,
-            f"{os.path.splitext(pdf_file)[0]}_page{idx}_table{idx}.csv"
+            f"{os.path.splitext(pdf_file)[0]}_{idx}.csv"
         )
         # Add metadata columns if desired inside each DataFrame
         df.insert(0, "source_file", pdf_file)
