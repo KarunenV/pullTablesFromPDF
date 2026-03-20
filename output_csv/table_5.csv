@@ -1,0 +1,24 @@
+Unnamed: 0,Unnamed: 1
+"Glossary of TermsClaim Number:A unique ten-digit number used to identify an accident, event, or occurrence.Claimant:Entity that files a claim against a policy.Loss Type:Claim Level Coverage further breaks down the Coverages. Example: Workers Compensation (WC) is a Coverage and the Claim Level Coveragesfor WC are Lost Time and Medical. Also known as Sub Coverage.Coverage Type:Line of Business.Date of Loss:Actual date the loss occurred for a claim.Date valued as of:The date that the data within the report is valued.Acc Description:Description of Loss.Financials:Total PaidPaid indemnity and expense.Reserve:Reserve indemnity and expense.Indemnity PaidBI/Med and PD/LT - No Expenses.Expenses PaidAll Expenses for both Bi/Med and PD/LTIndemnity ReserveBI/Med plus PD/LT - No ExpensesTotal IncurredPaid + Reserves + Claim Recoveries.Policy Symbol:The two or three position character field used to identify the policy type or line of business.Policy Number:The seven-digit number assigned to identify the policy.Policy Year:The year a policy was effective.Status:This field indicates whether the claim is open or closed.Customer Name:Name of the Insured.Date Closed:Date the loss was closed.Date Reported:Date the loss was reported to Zurich or a cooperative partner.",Glossary of Terms
+Claim Number:,"A unique ten-digit number used to identify an accident, event, or occurrence."
+Claimant:,Entity that files a claim against a policy.
+Loss Type:,"Claim Level Coverage further breaks down the Coverages. Example: Workers Compensation (WC) is a Coverage and the Claim Level Coveragesfor WC are Lost Time and Medical. Also known as Sub Coverage."
+Coverage Type:,Line of Business.
+Date of Loss:,Actual date the loss occurred for a claim.
+Date valued as of:,The date that the data within the report is valued.
+Acc Description:,Description of Loss.
+Financials:,
+Total Paid,Paid indemnity and expense.
+Reserve:,Reserve indemnity and expense.
+Indemnity Paid,BI/Med and PD/LT - No Expenses.
+Expenses Paid,All Expenses for both Bi/Med and PD/LT
+Indemnity Reserv,BI/Med plus PD/LT - No Expenses
+Total Incurred,Paid + Reserves + Claim Recoveries.
+Policy Symbol:,The two or three position character field used to identify the policy type or line of business.
+Policy Number:,The seven-digit number assigned to identify the policy.
+Policy Year:,The year a policy was effective.
+Status:,This field indicates whether the claim is open or closed.
+Customer Name:,Name of the Insured.
+Date Closed:,Date the loss was closed.
+Date Reported:,Date the loss was reported to Zurich or a cooperative partner.
+,
