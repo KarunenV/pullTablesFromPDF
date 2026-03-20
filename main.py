@@ -1,9 +1,13 @@
 import os
+from pathlib import Path
 import tabula
 
-input_dir = r"d:\Documents\Coomaren\pullTablesFromPDF\input_pdfs"
-output_dir = r"d:\Documents\Coomaren\pullTablesFromPDF\output_csv"
-os.makedirs(output_dir, exist_ok=True)
+# Base directory = folder where this script is located
+BASE_DIR = Path(__file__).resolve().parent
+
+input_dir = BASE_DIR / "input_pdfs"
+output_dir = BASE_DIR / "output_csv"
+output_dir.mkdir(parents=True, exist_ok=True)
 
 pdf_files = [f for f in os.listdir(input_dir) if f.lower().endswith(".pdf")]
 if not pdf_files:
