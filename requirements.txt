@@ -1,0 +1,6 @@
+camelot-py[cv]
+tabula-py
+pandas
+pdfplumber
+opencv-python
+numpy
