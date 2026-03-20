@@ -1,14 +1,36 @@
 import os
 import tabula
 
-pdf_path = r"d:\Documents\Coomaren\pullTablesFromPDF\Zurich Loss Run - Beau Geste XXV LLC - AL BAP-0141914 vao 1.7.25.PDF"
+input_dir = r"d:\Documents\Coomaren\pullTablesFromPDF\input_pdfs"
 output_dir = r"d:\Documents\Coomaren\pullTablesFromPDF\output_csv"
 os.makedirs(output_dir, exist_ok=True)
 
-dfs = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True)
+pdf_files = [f for f in os.listdir(input_dir) if f.lower().endswith(".pdf")]
+if not pdf_files:
+    raise SystemExit(f"No PDF files found in input folder: {input_dir}")
 
-for idx, df in enumerate(dfs, start=1):
-    out = os.path.join(output_dir, f"table_{idx}.csv")
-    df.to_csv(out, index=False)
-    print("Saved", out)
-print("Total tables:", len(dfs))
+total_tables = 0
+for pdf_file in sorted(pdf_files):
+    pdf_path = os.path.join(input_dir, pdf_file)
+    print(f"Processing: {pdf_path}")
+
+    # Extract all tables from all pages
+    dfs = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True)
+    if not dfs:
+        print(f"  No tables found in {pdf_file}")
+        continue
+
+    for idx, df in enumerate(dfs, start=1):
+        out = os.path.join(
+            output_dir,
+            f"{os.path.splitext(pdf_file)[0]}_page{idx}_table{idx}.csv"
+        )
+        # Add metadata columns if desired inside each DataFrame
+        df.insert(0, "source_file", pdf_file)
+        df.insert(1, "table_no", idx)
+        df.to_csv(out, index=False)
+        print(f"  Saved: {out}")
+
+    total_tables += len(dfs)
+
+print(f"Completed. Total tables extracted: {total_tables}")
