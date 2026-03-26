@@ -1,0 +1,29 @@
+Claim #,Claimant,Loss Type,"Date of
+Loss","Loss
+State",Status,"Reported
+Date","Closed
+Date","Paid
+Indemnity
+BI/Med","Paid
+Indemnity
+PD/LT","Ind
+Reserve",Exp Paid,"Exp
+Res",Total Paid,"Incurred
+Total"
+9510099287,,"GENERAL
+LIABILITY",03/15/2015,MA,Closed,03/17/2015,06/08/2015,$200.00,$0.00,$0.00,$23.00,$0.00,$223.00,$223.00
+,,PRODUCTS,03/15/2015,MA,Closed,03/17/2015,06/08/2015,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00
+"Acc
+Description",Products: cause not otherwise listed,,,,,,,,,,,,,
+9510099939,,"GENERAL
+LIABILITY",04/04/2015,MA,Closed,04/06/2015,06/18/2015,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00
+"Acc
+Description","Premises/operations: slip/fall misc, not highway/municipal.",,,,,,,,,,,,,
+9510101581,,"GENERAL
+LIABILITY",05/22/2015,MA,Closed,05/26/2015,06/05/2015,$0.00,$0.00,$0.00,$23.00,$0.00,$23.00,$23.00
+"Acc
+Description",Premises/operations: Cut/scrape by sharp object,,,,,,,,,,,,,
+9510106152,,"GENERAL
+LIABILITY",09/19/2015,MA,Closed,09/22/2015,09/30/2015,$0.00,$500.00,$0.00,$39.00,$0.00,$539.00,$539.00
+"Acc
+Description","Premises/operations: slip/fall misc, not highway/municipal.",,,,,,,,,,,,,

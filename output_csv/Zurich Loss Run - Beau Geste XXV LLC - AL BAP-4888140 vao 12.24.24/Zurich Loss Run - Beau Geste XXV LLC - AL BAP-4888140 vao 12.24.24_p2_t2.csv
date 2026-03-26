@@ -1,0 +1,31 @@
+Claim #,Claimant,Loss Type,"Date of
+Loss","Loss
+State",Status,"Reported
+Date","Closed
+Date","Paid
+Indemnity
+BI/Med","Paid
+Indemnity
+PD/LT","Ind
+Reserve",Exp Paid,"Exp
+Res",Total Paid,"Incurred
+Total"
+1510016903,,"AUTO PHYSICAL
+DAMAGE",04/17/2010,MA,Closed,04/21/2010,05/07/2010,$0.00,$574.28,$0.00,$101.85,$0.00,$676.13,$101.85
+"Acc
+Description",Auto: insured vehicle struck while parked,,,,,,,,,,,,,
+1510017887,,"AUTO PHYSICAL
+DAMAGE",06/10/2010,MA,Closed,06/11/2010,06/17/2010,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00
+"Acc
+Description",Auto: insured vehicle struck while parked,,,,,,,,,,,,,
+1510024903,,"AUTO PHYSICAL
+DAMAGE",09/15/2010,CT,Closed,01/28/2011,01/31/2011,$0.00,$770.58,$0.00,$5.10,$0.00,$775.68,$775.68
+"Acc
+Description",Auto: insured vehicle struck fixed object,,,,,,,,,,,,,
+4510030702,,AUTO LIABILITY,04/17/2010,MA,Closed,04/21/2010,04/27/2010,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00,$0.00
+"Acc
+Description",Auto: insured vehicle struck while parked,,,,,,,,,,,,,
+4510032034,,AUTO LIABILITY,06/10/2010,MA,Closed,06/11/2010,05/02/2011,"$9,119.00",$0.00,$0.00,$0.00,$0.00,"$9,119.00","$9,119.00"
+,,AUTO LIABILITY,06/10/2010,MA,Closed,06/11/2010,05/02/2011,$0.00,"$1,715.17",$0.00,$79.50,$0.00,"$1,794.67","$1,794.67"
+"Acc
+Description",Auto: insured vehicle struck while parked,,,,,,,,,,,,,

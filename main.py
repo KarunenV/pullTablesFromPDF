@@ -1,40 +1,32 @@
-import os
+import pdfplumber
+import pandas as pd
 from pathlib import Path
-import tabula
 
-# Base directory = folder where this script is located
 BASE_DIR = Path(__file__).resolve().parent
-
 input_dir = BASE_DIR / "input_pdfs"
 output_dir = BASE_DIR / "output_csv"
-output_dir.mkdir(parents=True, exist_ok=True)
+output_dir.mkdir(exist_ok=True)
 
-pdf_files = [f for f in os.listdir(input_dir) if f.lower().endswith(".pdf")]
-if not pdf_files:
-    raise SystemExit(f"No PDF files found in input folder: {input_dir}")
+for pdf_path in input_dir.glob("*.pdf"):
+    pdf_name = pdf_path.stem
+    pdf_out_dir = output_dir / pdf_name
+    pdf_out_dir.mkdir(exist_ok=True)
 
-total_tables = 0
-for pdf_file in sorted(pdf_files):
-    pdf_path = os.path.join(input_dir, pdf_file)
-    print(f"Processing: {pdf_path}")
+    print(f"\nProcessing {pdf_path.name}")
 
-    # Extract all tables from all pages
-    dfs = tabula.read_pdf(pdf_path, pages="all", multiple_tables=True)
-    if not dfs:
-        print(f"  No tables found in {pdf_file}")
-        continue
+    with pdfplumber.open(pdf_path) as pdf:
+        for page_num, page in enumerate(pdf.pages, start=1):
+            tables = page.extract_tables()
 
-    for idx, df in enumerate(dfs, start=1):
-        out = os.path.join(
-            output_dir,
-            f"{os.path.splitext(pdf_file)[0]}_{idx}.csv"
-        )
-        # Add metadata columns if desired inside each DataFrame
-        df.insert(0, "source_file", pdf_file)
-        df.insert(1, "table_no", idx)
-        df.to_csv(out, index=False)
-        print(f"  Saved: {out}")
+            if not tables:
+                continue
 
-    total_tables += len(dfs)
+            for table_num, table in enumerate(tables, start=1):
+                df = pd.DataFrame(table[1:], columns=table[0])
 
-print(f"Completed. Total tables extracted: {total_tables}")
+                out = pdf_out_dir / f"{pdf_name}_p{page_num}_t{table_num}.csv"
+                df.to_csv(out, index=False)
+
+                print(f"  Saved {out.name}")
+
+            
