@@ -6,6 +6,7 @@ class PdfFileInfo:
         self.pdf_name = pdf_name
         self.table_data = table_data
         self.current_index = 0
+        self.current_search_start_index = 0
         
 
     def get_current_table(self):
@@ -34,6 +35,14 @@ class PdfFileInfo:
     def has_previous_table(self):
         return self.current_index > 0
     
+    def has_next_search_result(self):
+        for index in range(self.current_search_start_index, len(self.table_data)):
+            if self.table_data[index].search_flag:
+                self.current_index = index
+                self.current_search_start_index = index + 1
+                return True
+        return False
+    
     def copy_csv(self):
         table = self.get_current_table()
         if table is not None:
@@ -50,3 +59,7 @@ class PdfFileInfo:
         )
         if path:
             table.table_data.to_csv(path, index=False)
+
+    def update_search_flag(self, query):
+        for table in self.table_data:
+            table.update_search_flag(query)

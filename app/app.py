@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, messagebox
 from PIL import Image, ImageTk
 import threading
 import queue
@@ -19,6 +19,7 @@ class ImageReviewApp(tk.Tk):
         self.output_dir = output_dir
         self.process_pdfs = []
         self.result_queue = queue.Queue()
+        self.previous_query = ""
 
         self.title("Image Review")
         self.geometry("800x600")
@@ -35,15 +36,30 @@ class ImageReviewApp(tk.Tk):
 
         # Left listbox panel
         self.list_frame = tk.Frame(self.paned)
-        self.list_frame.rowconfigure(0, weight=1)
+        self.list_frame.rowconfigure(1, weight=1)
         self.list_frame.columnconfigure(0, weight=1)
 
+        search_frame = tk.Frame(self.list_frame)
+        search_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=(10, 0))
+        search_frame.columnconfigure(1, weight=1)
+
+        tk.Label(search_frame, text="Search:").grid(row=0, column=0, sticky="w")
+        self.search_var = tk.StringVar()
+        self.search_entry = tk.Entry(search_frame, textvariable=self.search_var)
+        self.search_entry.grid(row=0, column=1, sticky="ew", padx=(5, 5))
+        self.search_entry.bind("<Return>", lambda event: self.search_pdfs())
+
+        self.search_btn = tk.Button(search_frame, text="Find", command=self.search_pdfs)
+        self.search_btn.grid(row=0, column=2, padx=(0, 5))
+        self.clear_btn = tk.Button(search_frame, text="Clear", command=self.clear_search)
+        self.clear_btn.grid(row=0, column=3)
+
         self.listbox = tk.Listbox(self.list_frame)
-        self.listbox.grid(row=0, column=0, sticky="nsew", padx=(10, 0), pady=10)
+        self.listbox.grid(row=1, column=0, sticky="nsew", padx=(10, 0), pady=10)
         self.listbox.bind("<<ListboxSelect>>", self.on_item_click)
 
         self.listbox_scrollbar = tk.Scrollbar(self.list_frame, orient="vertical", command=self.listbox.yview)
-        self.listbox_scrollbar.grid(row=0, column=1, sticky="ns", pady=10)
+        self.listbox_scrollbar.grid(row=1, column=1, sticky="ns", pady=10)
         self.listbox.config(yscrollcommand=self.listbox_scrollbar.set)
 
         self.paned.add(self.list_frame, minsize=200)
@@ -146,6 +162,8 @@ class ImageReviewApp(tk.Tk):
 
     def on_pdf_finished(self, result):
         self.process_pdfs.append(result)
+        if self.previous_query:
+            result.update_search_flag(self.previous_query)
         self.after(0, lambda: self.listbox.insert(tk.END, result.pdf_name))
 
         if len(self.process_pdfs) == 1:
@@ -257,6 +275,38 @@ class ImageReviewApp(tk.Tk):
     def save_csv(self):
         self.process_pdfs[self._get_index()].save_csv(self.output_dir)
 
+    def search_pdfs(self):
+        query = self.search_var.get().strip().lower()
+        if not query:
+            return
+        
+        if query != self.previous_query:
+            for index, pdf in enumerate(self.process_pdfs):
+                pdf.update_search_flag(query)
+            self.previous_query = query
+            starting_index = 0
+        else:
+            starting_index = self._get_index()
+
+        for index in range(starting_index, len(self.process_pdfs)):
+            if self.process_pdfs[index].has_next_search_result():
+                self.listbox.selection_clear(0, tk.END)
+                self.listbox.selection_set(index)
+                self.listbox.see(index)
+                self.on_item_click(None)
+
+                self.load_current_image_async()
+                return
+
+        messagebox.showinfo("Search", f"No PDF matched '{self.search_var.get()}'")
+
+    def clear_search(self):
+        self.search_var.set("")
+        if self.process_pdfs:
+            self.listbox.selection_clear(0, tk.END)
+            self.listbox.selection_set(0)
+            self.listbox.see(0)
+            self.on_item_click(None)
 
     def copy_csv(self):
         self.process_pdfs[self._get_index()].copy_csv()
