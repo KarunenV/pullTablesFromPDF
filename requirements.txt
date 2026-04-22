@@ -4,3 +4,4 @@ pdfplumber
 opencv-python
 numpy
 pillow
+pymupdf
