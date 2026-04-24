@@ -16,10 +16,10 @@ def extract_tables_from_pdf(pdf_path):
 
     try:
         for page_index, page_plumber in enumerate(plumber_doc.pages, start=0):
-            tables = extract_tables_from_plumber_page(page_plumber, page_index + 1)
-            if len(tables) > 0:
-                pdf_table_infos.extend(tables)
-                continue
+            # tables = extract_tables_from_plumber_page(page_plumber, page_index + 1)
+            # if len(tables) > 0:
+            #     pdf_table_infos.extend(tables)
+            #     continue
 
             rects = page_plumber.rects
             if len(rects) > 2:
